@@ -56,11 +56,12 @@ class TestLogin:
         expect(self.login.locator_password_tip1).to_be_visible()
         expect(self.login.locator_password_tip1).to_contain_text('不能为空')
 
-    @pytest.mark.parametrize('username, pwd', [
-        ['tikas', '12345678901234567890'],
-        ['daij', '123'],
+    # 不知道为什么加上了title，估计是allure报告会用上吧
+    @pytest.mark.parametrize('username, pwd, title', [
+        ['tikas', '12345678901234567890', '密码超过16位'],
+        ['daij', '123', '密码少于6位'],
     ])
-    def test_login_5(self, username:str, pwd: str):
+    def test_login_5(self, username:str, pwd: str, title:str):
         """密码小于6位或者大于16位"""
         self.login.fill_username(username)
         self.login.fill_password(pwd)
@@ -89,9 +90,13 @@ class TestLogin:
         expect(self.login.locator_password_tip1).to_be_visible()
         expect(self.login.locator_password_tip1).to_contain_text('不能为空')
 
-    def test_login_error(self):
+    @pytest.mark.parametrize('username, pwd, title', [
+        ['daij123', 'aa123456', '用户名错误，密码正确'],
+        ['daij', 'aa123456789', '用户名正确，密码错误']
+    ])
+    def test_login_error(self, username:str, pwd: str, title:str):
         """用户名密码错误"""
-        self.login.login('daij', '123456aa')
+        self.login.login(username, pwd)
         expect(self.login.locator_login_error).to_be_visible()
 
     def test_register_link(self):
