@@ -3,6 +3,10 @@ from pytest_playwright.pytest_playwright import browser
 from typing import Dict, Any
 
 
+"""
+    我只写了登录注册页面的context和page，并且删去了很多功能
+"""
+
 @pytest.fixture(scope="module")
 def unlogin_context(browser, base_url, pytestconfig, browser_context_args: Dict):
     """
