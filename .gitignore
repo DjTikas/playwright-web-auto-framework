@@ -1,0 +1,17 @@
+# Python 字节码缓存
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 虚拟环境
+.venv/
+venv/
+
+# playwright 报告、截图视频
+results/
+allure-report/
+allure-results/
+
+# pycharm
+.idea/
+*.iml
