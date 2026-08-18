@@ -1,3 +1,5 @@
+import uuid
+
 import pytest
 from playwright.sync_api import Page, expect
 
@@ -20,7 +22,7 @@ class TestAddProject:
         self.add_project.fill_publish_app('')
         self.add_project.click_submit_btn()
         # 断言 按钮不可点击
-        expect(self.add_project.locator_submit_btn).not_to_be_enabled()
+        expect(self.add_project.locator_submit_btn).to_be_disabled()
 
     @pytest.mark.parametrize('name, app, desc, title', [
         ['test@*', '', '', '项目名称包含特殊字符'],
@@ -53,6 +55,40 @@ class TestAddProject:
             """
         self.add_project.fill_project_desc(desc)
         # 断言 按钮不可点击
-        expect(self.add_project.locator_submit_btn).not_to_be_enabled()
+        expect(self.add_project.locator_submit_btn).to_be_disabled()
+
+    def test_add_project_400(self):
+        """项目已存在，弹出模态框"""
+        self.add_project.fill_project_name('test')
+        self.add_project.click_submit_btn()
+        # 校验结果 弹出框文本包含
+        expect(self.add_project.locator_bootbox).to_be_visible()
+        expect(self.add_project.locator_bootbox).to_contain_text('已存在')
+
+    def test_add_project_success(self):
+        """添加成功，跳转到项目列表页面"""
+        self.add_project.fill_project_name(str(uuid.uuid4())[:8])
+        self.add_project.click_submit_btn()
+        expect(self.add_project.page).to_have_title('项目列表')
+        expect(self.add_project.page).to_have_url('/list_project.html')
+
+    def test_add_project_success_2(self):
+        """添加成功，判断项目列表页面中存在新增的项目"""
+        project_name = str(uuid.uuid4())[:8]
+        self.add_project.fill_project_name(project_name)
+        self.add_project.click_submit_btn()
+        # 点击保存后等页面重定向到table表格页
+        self.add_project.page.wait_for_load_state('networkidle')
+        # 等待表格DOM出现，再去all拿元素，减少偶发空列表
+        self.add_project.page.locator("#table").wait_for()
+        # 断言新增项目在列表页
+        print(f"新增项目名称: {project_name}")
+        # 获取页面 table 表格-项目名称列全部内容
+        locator_projects = self.add_project.page.locator(
+            '//*[@id="table"]//td[3]/a'
+        )
+        project_name_list = [i.inner_text() for i in locator_projects.all()]
+        print(project_name_list)
+        assert project_name in project_name_list
 
 

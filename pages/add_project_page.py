@@ -11,7 +11,7 @@ class AddProjectPage:
         # 提示信息，忽略，因为和登录注册重复太多了
         # self.locator_project_name_tip1 = page.locator('[data-fv-validator="notEmpty"][data-fv-for="project_name"]')
         # 弹出的框，加 visible=True，只匹配显示出来的弹窗
-        self.locator_bootbox = page.locator('.bootbox.body').locator('visabel=true')
+        self.locator_bootbox = page.locator('.bootbox-body')
 
     def navigate(self):
         self.page.goto('/add_project.html')
