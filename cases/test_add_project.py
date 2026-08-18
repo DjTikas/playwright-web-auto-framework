@@ -3,6 +3,7 @@ import uuid
 import pytest
 from playwright.sync_api import Page, expect
 
+from mocks import mock_api
 from pages.add_project_page import AddProjectPage
 
 
@@ -57,13 +58,25 @@ class TestAddProject:
         # 断言 按钮不可点击
         expect(self.add_project.locator_submit_btn).to_be_disabled()
 
-    def test_add_project_400(self):
-        """项目已存在，弹出模态框"""
+    def test_add_project_400(self, shared_page):
+        """项目已存在，弹出模态框，400状态码"""
         self.add_project.fill_project_name('test')
+        # mock 接口返回400
+        shared_page.route(**mock_api.mock_project_400)
         self.add_project.click_submit_btn()
         # 校验结果 弹出框文本包含
         expect(self.add_project.locator_bootbox).to_be_visible()
         expect(self.add_project.locator_bootbox).to_contain_text('已存在')
+
+    def test_add_project_500(self, shared_page):
+        """服务器异常，500状态码"""
+        self.add_project.fill_project_name('test')
+        # mock 接口返回500
+        shared_page.route(**mock_api.mock_project_500)
+        self.add_project.click_submit_btn()
+        # 校验结果 弹出框文本包含
+        expect(self.add_project.locator_bootbox).to_be_visible()
+        expect(self.add_project.locator_bootbox).to_contain_text('操作异常')
 
     def test_add_project_success(self):
         """添加成功，跳转到项目列表页面"""
