@@ -98,7 +98,7 @@ class TestAddProject:
         print(f"新增项目名称: {project_name}")
         # 获取页面 table 表格-项目名称列全部内容
         locator_projects = self.add_project.page.locator(
-            '//*[@id="table"]//td[3]/a'
+            '//table[@id="table"]//td[3]/a'
         )
         project_name_list = [i.inner_text() for i in locator_projects.all()]
         print(project_name_list)
