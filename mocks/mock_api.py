@@ -104,3 +104,94 @@ mock_project_delete_403 = {
         })
     )
 }
+
+
+"""
+/**** 模拟新增模块 项目选项 ***/
+"""
+mock_project_select_200 = {
+    "url": "**/api/project",
+    "handler": lambda route: route.fulfill(
+        status=200,
+        body=json.dumps({
+            "total": 9,
+            "rows": [
+                {
+                    "id": 53,
+                    "project_name": "test",
+                    "publish_app": "",
+                    "project_desc": "",
+                    "active": "1",
+                    "create_time": "2023-03-02 11:30:00",
+                    "update_time": "2023-03-02 11:30:00",
+                    "test_user": "py"
+                },
+                {
+                    "id": 43,
+                    "project_name": "hello",
+                    "publish_app": "xx",
+                    "project_desc": "xxx",
+                    "active": "1",
+                    "create_time": "2023-03-01 22:06:05",
+                    "update_time": "2023-03-01 22:06:05",
+                    "test_user": "py"
+                }, {
+                    "id": 42,
+                    "project_name": "world",
+                    "publish_app": "xx",
+                    "project_desc": "xxx",
+                    "active": "1",
+                    "create_time": "2023-03-01 21:30:06",
+                    "update_time": "2023-03-01 21:30:06",
+                    "test_user": "py"
+                }, {
+                    "id": 41,
+                    "project_name": "测试项目",
+                    "publish_app": "xx",
+                    "project_desc": "xxx",
+                    "active": "1",
+                    "create_time": "2023-03-01 21:29:35",
+                    "update_time": "2023-03-01 21:29:35",
+                    "test_user": "py"
+                }]
+        })
+    )
+}
+
+
+"""
+    模拟新增模块名重复，返回400
+"""
+mock_module_repeat_400 = {
+    "url": "**/api/module",
+    'handler': lambda route: route.fulfill(
+        status = 400,
+        body=json.dumps({
+            "message": "module_name: test 已存在"
+        })
+    )
+}
+
+"""
+    模拟新增模块成功，返回201
+"""
+mock_add_module_201 = {
+    "url": "**/api/module",
+    'handler': lambda route: route.fulfill(
+        status = 201,
+        body=json.dumps({
+            "code": 0,
+            "message": "success",
+            "data": {
+                "id": 103,
+                "module_name": "testxx",
+                "project_id": 53,
+                "test_user": "py",
+                "module_desc": "",
+                "create_time": "2026-08-22 19:54:56",
+                "update_time": "2026-08-22 19:54:56",
+                "project_name": "test"
+            }
+        })
+    )
+}
