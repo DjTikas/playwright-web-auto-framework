@@ -8,6 +8,7 @@ from pages.add_project_page import AddProjectPage
 
 
 class TestAddProject:
+    """新增项目页"""
     @pytest.fixture(autouse=True)
     def start_for_each(self, login_prepare, shared_page: Page):
         print("for each--start: 打开添加项目页")

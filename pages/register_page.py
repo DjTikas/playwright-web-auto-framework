@@ -1,3 +1,4 @@
+import allure
 from playwright.sync_api import Page
 
 class RegisterPage:
@@ -19,21 +20,27 @@ class RegisterPage:
         self.locator_register_error = page.get_by_text('用户名已存在或不合法！')
 
     def navigate(self):
-        self.page.goto('/register.html')
+        with allure.step("导航到注册页"):
+            self.page.goto('/register.html')
 
     def fill_username(self, username):
-        self.locator_username.fill(username)
+        with allure.step(f"输入用户名{username}"):
+            self.locator_username.fill(username)
 
     def fill_password(self, password):
-        self.locator_password.fill(password)
+        with allure.step(f"输入用密码{password}"):
+            self.locator_password.fill(password)
 
     def click_register_btn(self):
-        self.locator_register_btn.click()
+        with allure.step("点击注册按钮"):
+            self.locator_register_btn.click()
 
     def click_login_link(self):
-        self.locator_login_link.click()
+        with allure.step("点击登录链接"):
+            self.locator_login_link.click()
 
     def register(self, username, password):
-        self.fill_username(username)
-        self.fill_password(password)
-        self.click_register_btn()
+        with allure.step(f"输入用户名{username}，密码{password}，点击登录"):
+            self.fill_username(username)
+            self.fill_password(password)
+            self.click_register_btn()

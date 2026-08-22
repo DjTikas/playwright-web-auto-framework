@@ -1,19 +1,20 @@
-# from pytest import Item
-# import allure
+from pytest import Item
+import allure
 # import pytest
 # from typing import Dict
 #
 # # 本地插件注册
-# pytest_plugins = ['plugins.pytest_playwright', 'plugins.pytest_base_url_plugin']
+# pytest_plugins = ['plugins.pytest_playwright']
+# , 'plugins.pytest_base_url_plugin']
 #
-#
-# def pytest_runtest_call(item: Item):
-#     # 动态添加测试类的allure.feature()
-#     if item.parent._obj.__doc__:
-#         allure.dynamic.feature(item.parent._obj.__doc__)
-#     # 动态添加测试用例的title标题allure.title()
-#     if item.function.__doc__:
-#         allure.dynamic.title(item.function.__doc__)
+
+def pytest_runtest_call(item: Item):
+    # 动态添加测试类的allure.feature()
+    if item.parent._obj.__doc__:
+        allure.dynamic.feature(item.parent._obj.__doc__)
+    # 动态添加测试用例的title标题allure.title()
+    if item.function.__doc__:
+        allure.dynamic.title(item.function.__doc__)
 #
 # # 重写插件钩子 1
 # # 生产参数字典，供给 pytest‑playwright 内部，用于启动浏览器。
