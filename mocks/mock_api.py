@@ -624,14 +624,14 @@ mock_add_env_400 = {
 mock_add_env_200 = {
     'url': '**api/env',
     'handler': lambda route: route.fulfill(
-        status=400,
+        status=200,
         body=({
             "code": 0,
             "message": "success",
             "data": {
                 "id": 30,
                 "env_name": "test2026",
-                "base_url": "http://0.0.0.0",
+                "base_url": "http://www.baidu.com",
                 "simple_desc": "",
                 "env_code": "",
                 "test_user": "daij",

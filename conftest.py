@@ -1,3 +1,7 @@
+import os
+import shutil
+
+import pytest
 from pytest import Item
 import allure
 # import pytest
@@ -15,6 +19,26 @@ def pytest_runtest_call(item: Item):
     # 动态添加测试用例的title标题allure.title()
     if item.function.__doc__:
         allure.dynamic.title(item.function.__doc__)
+
+
+def _clean_dir(dir_path: str):
+    if os.path.exists(dir_path):
+        for name in os.listdir(dir_path):
+            full_path = os.path.join(dir_path, name)
+            if os.path.isfile(full_path):
+                os.remove(full_path)
+            elif os.path.isdir(full_path):
+                shutil.rmtree(full_path)
+    else:
+        os.makedirs(dir_path, exist_ok=True)
+
+@pytest.fixture(scope="session", autouse=True)
+def clean_allure_env():
+    """会话启动自动清理allure‑results和reports"""
+    _clean_dir("test-results")
+    _clean_dir("reports")
+    yield
+
 #
 # # 重写插件钩子 1
 # # 生产参数字典，供给 pytest‑playwright 内部，用于启动浏览器。

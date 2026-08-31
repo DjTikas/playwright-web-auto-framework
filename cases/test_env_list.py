@@ -105,8 +105,8 @@ class TestEnvList:
         self.env.click_add_env()  # 弹出新增框
         # 断言模态框不隐藏
         expect(self.env.locator_add_modal).not_to_be_hidden()
-        self.env.input_env_name('py2')
-        self.env.input_env_address('http://www.yoyo.com')
+        self.env.input_env_name('test2026')
+        self.env.input_env_address('http://www.baidu.com')
         # mock 返回200 成功
         self.env.page.route(**mock_add_env_200)
         self.env.click_modal_save()
