@@ -13,4 +13,4 @@ if __name__ == '__main__':
     # 生成测试报告
     os.system('allure generate ./reports -o ./allure_report --clean --lang zh')
     # 打开测试报告
-    os.system('allure serve ./reports')
+    # os.system('allure serve ./reports')

@@ -117,6 +117,16 @@ mock_project_select_200 = {
             "total": 9,
             "rows": [
                 {
+                    "id": 1111,
+                    "project_name": "test_module",
+                    "publish_app": "",
+                    "project_desc": "",
+                    "active": "1",
+                    "create_time": "2023-03-02 11:30:00",
+                    "update_time": "2023-03-02 11:30:00",
+                    "test_user": "daij"
+                },
+                {
                     "id": 53,
                     "project_name": "test",
                     "publish_app": "",
@@ -191,6 +201,442 @@ mock_add_module_201 = {
                 "create_time": "2026-08-22 19:54:56",
                 "update_time": "2026-08-22 19:54:56",
                 "project_name": "test"
+            }
+        })
+    )
+}
+
+"""
+    模拟模块列表页的表格内容 1
+"""
+mock_module_list_table_page_1 = {
+    "url": "**/api/module**",
+    'handler': lambda route: route.fulfill(
+        status = 200,
+        body=json.dumps({
+            "total": 28,
+            "rows": [
+                {
+                    "id": 123,
+                    "module_name": "123aaa",
+                    "project_id": 1111,
+                    "test_user": "daij",
+                    "module_desc": "",
+                    "create_time": "2026-08-22 19:54:56",
+                    "update_time": "2026-08-22 19:54:56",
+                    "project_name": "test_module"
+                },
+                {
+                    "id": 122,
+                    "module_name": "122aaa",
+                    "project_id": 1111,
+                    "test_user": "daij",
+                    "module_desc": "",
+                    "create_time": "2026-08-22 19:54:56",
+                    "update_time": "2026-08-22 19:54:56",
+                    "project_name": "test_module"
+                },
+                {
+                    "id": 121,
+                    "module_name": "121aaa",
+                    "project_id": 1111,
+                    "test_user": "daij",
+                    "module_desc": "",
+                    "create_time": "2026-08-22 19:54:56",
+                    "update_time": "2026-08-22 19:54:56",
+                    "project_name": "test_module"
+                },
+                {
+                    "id": 120,
+                    "module_name": "120aaa",
+                    "project_id": 1111,
+                    "test_user": "daij",
+                    "module_desc": "",
+                    "create_time": "2026-08-22 19:54:56",
+                    "update_time": "2026-08-22 19:54:56",
+                    "project_name": "test_module"
+                },
+                {
+                    "id": 119,
+                    "module_name": "119aaa",
+                    "project_id": 1111,
+                    "test_user": "daij",
+                    "module_desc": "",
+                    "create_time": "2026-08-22 19:54:56",
+                    "update_time": "2026-08-22 19:54:56",
+                    "project_name": "test_module"
+                },
+                {
+                    "id": 118,
+                    "module_name": "118aaa",
+                    "project_id": 1111,
+                    "test_user": "daij",
+                    "module_desc": "",
+                    "create_time": "2026-08-22 19:54:56",
+                    "update_time": "2026-08-22 19:54:56",
+                    "project_name": "test_module"
+                },
+                {
+                    "id": 117,
+                    "module_name": "117aaa",
+                    "project_id": 1111,
+                    "test_user": "daij",
+                    "module_desc": "",
+                    "create_time": "2026-08-22 19:54:56",
+                    "update_time": "2026-08-22 19:54:56",
+                    "project_name": "test_module"
+                },
+                {
+                    "id": 116,
+                    "module_name": "116aaa",
+                    "project_id": 1111,
+                    "test_user": "daij",
+                    "module_desc": "",
+                    "create_time": "2026-08-22 19:54:56",
+                    "update_time": "2026-08-22 19:54:56",
+                    "project_name": "test_module"
+                },
+                {
+                    "id": 115,
+                    "module_name": "115aaa",
+                    "project_id": 1111,
+                    "test_user": "daij",
+                    "module_desc": "",
+                    "create_time": "2026-08-22 19:54:56",
+                    "update_time": "2026-08-22 19:54:56",
+                    "project_name": "test_module"
+                },
+                {
+                    "id": 114,
+                    "module_name": "114aaa",
+                    "project_id": 1111,
+                    "test_user": "daij",
+                    "module_desc": "",
+                    "create_time": "2026-08-22 19:54:56",
+                    "update_time": "2026-08-22 19:54:56",
+                    "project_name": "test_module"
+                },
+                {
+                    "id": 113,
+                    "module_name": "113aaa",
+                    "project_id": 1111,
+                    "test_user": "daij",
+                    "module_desc": "",
+                    "create_time": "2026-08-22 19:54:56",
+                    "update_time": "2026-08-22 19:54:56",
+                    "project_name": "test_module"
+                },
+                {
+                    "id": 112,
+                    "module_name": "112aaa",
+                    "project_id": 1111,
+                    "test_user": "daij",
+                    "module_desc": "",
+                    "create_time": "2026-08-22 19:54:56",
+                    "update_time": "2026-08-22 19:54:56",
+                    "project_name": "test_module"
+                },
+                {
+                    "id": 111,
+                    "module_name": "111aaa",
+                    "project_id": 1111,
+                    "test_user": "daij",
+                    "module_desc": "",
+                    "create_time": "2026-08-22 19:54:56",
+                    "update_time": "2026-08-22 19:54:56",
+                    "project_name": "test_module"
+                },
+                {
+                    "id": 110,
+                    "module_name": "110aaa",
+                    "project_id": 1111,
+                    "test_user": "daij",
+                    "module_desc": "",
+                    "create_time": "2026-08-22 19:54:56",
+                    "update_time": "2026-08-22 19:54:56",
+                    "project_name": "test_module"
+                },
+                {
+                    "id": 109,
+                    "module_name": "109aaa",
+                    "project_id": 1111,
+                    "test_user": "daij",
+                    "module_desc": "",
+                    "create_time": "2026-08-22 19:54:56",
+                    "update_time": "2026-08-22 19:54:56",
+                    "project_name": "test_module"
+                }
+            ]
+        })
+    )
+}
+
+
+"""
+    模拟模块列表页的表格内容 2
+"""
+mock_module_list_table_page_2 = {
+    "url": "**/api/module**",
+    'handler': lambda route: route.fulfill(
+        status = 200,
+        body=json.dumps({
+            "total": 25,
+            "rows": [
+                {
+                    "id": 108,
+                    "module_name": "108aaa",
+                    "project_id": 1111,
+                    "test_user": "daij",
+                    "module_desc": "",
+                    "create_time": "2026-08-22 19:54:56",
+                    "update_time": "2026-08-22 19:54:56",
+                    "project_name": "test_module"
+                },
+                {
+                    "id": 107,
+                    "module_name": "107aaa",
+                    "project_id": 1111,
+                    "test_user": "daij",
+                    "module_desc": "",
+                    "create_time": "2026-08-22 19:54:56",
+                    "update_time": "2026-08-22 19:54:56",
+                    "project_name": "test_module"
+                },
+                {
+                    "id": 106,
+                    "module_name": "106aaa",
+                    "project_id": 1111,
+                    "test_user": "daij",
+                    "module_desc": "",
+                    "create_time": "2026-08-22 19:54:56",
+                    "update_time": "2026-08-22 19:54:56",
+                    "project_name": "test_module"
+                },
+                {
+                    "id": 105,
+                    "module_name": "105aaa",
+                    "project_id": 1111,
+                    "test_user": "daij",
+                    "module_desc": "",
+                    "create_time": "2026-08-22 19:54:56",
+                    "update_time": "2026-08-22 19:54:56",
+                    "project_name": "test_module"
+                },
+                {
+                    "id": 104,
+                    "module_name": "104aaa",
+                    "project_id": 1111,
+                    "test_user": "daij",
+                    "module_desc": "",
+                    "create_time": "2026-08-22 19:54:56",
+                    "update_time": "2026-08-22 19:54:56",
+                    "project_name": "test_module"
+                },
+                {
+                    "id": 103,
+                    "module_name": "103aaa",
+                    "project_id": 1111,
+                    "test_user": "daij",
+                    "module_desc": "",
+                    "create_time": "2026-08-22 19:54:56",
+                    "update_time": "2026-08-22 19:54:56",
+                    "project_name": "test_module"
+                },
+                {
+                    "id": 102,
+                    "module_name": "102aaa",
+                    "project_id": 1111,
+                    "test_user": "daij",
+                    "module_desc": "",
+                    "create_time": "2026-08-22 19:54:56",
+                    "update_time": "2026-08-22 19:54:56",
+                    "project_name": "test_module"
+                },
+                {
+                    "id": 101,
+                    "module_name": "101aaa",
+                    "project_id": 1111,
+                    "test_user": "daij",
+                    "module_desc": "",
+                    "create_time": "2026-08-22 19:54:56",
+                    "update_time": "2026-08-22 19:54:56",
+                    "project_name": "test_module"
+                },
+                {
+                    "id": 100,
+                    "module_name": "100aaa",
+                    "project_id": 1111,
+                    "test_user": "daij",
+                    "module_desc": "",
+                    "create_time": "2026-08-22 19:54:56",
+                    "update_time": "2026-08-22 19:54:56",
+                    "project_name": "test_module"
+                },
+                {
+                    "id": 99,
+                    "module_name": "99aaa",
+                    "project_id": 1111,
+                    "test_user": "daij",
+                    "module_desc": "",
+                    "create_time": "2026-08-22 19:54:56",
+                    "update_time": "2026-08-22 19:54:56",
+                    "project_name": "test_module"
+                }
+            ]
+        })
+    )
+}
+
+"""
+    模拟模块列表页的表格内容 10行
+"""
+mock_module_list_table_10_row = {
+    "url": "**/api/module**",
+    'handler': lambda route: route.fulfill(
+        status = 200,
+        body=json.dumps({
+            "total": 28,
+            "rows": [
+                {
+                    "id": 123,
+                    "module_name": "123aaa",
+                    "project_id": 1111,
+                    "test_user": "daij",
+                    "module_desc": "",
+                    "create_time": "2026-08-22 19:54:56",
+                    "update_time": "2026-08-22 19:54:56",
+                    "project_name": "test_module"
+                },
+                {
+                    "id": 122,
+                    "module_name": "122aaa",
+                    "project_id": 1111,
+                    "test_user": "daij",
+                    "module_desc": "",
+                    "create_time": "2026-08-22 19:54:56",
+                    "update_time": "2026-08-22 19:54:56",
+                    "project_name": "test_module"
+                },
+                {
+                    "id": 121,
+                    "module_name": "121aaa",
+                    "project_id": 1111,
+                    "test_user": "daij",
+                    "module_desc": "",
+                    "create_time": "2026-08-22 19:54:56",
+                    "update_time": "2026-08-22 19:54:56",
+                    "project_name": "test_module"
+                },
+                {
+                    "id": 120,
+                    "module_name": "120aaa",
+                    "project_id": 1111,
+                    "test_user": "daij",
+                    "module_desc": "",
+                    "create_time": "2026-08-22 19:54:56",
+                    "update_time": "2026-08-22 19:54:56",
+                    "project_name": "test_module"
+                },
+                {
+                    "id": 119,
+                    "module_name": "119aaa",
+                    "project_id": 1111,
+                    "test_user": "daij",
+                    "module_desc": "",
+                    "create_time": "2026-08-22 19:54:56",
+                    "update_time": "2026-08-22 19:54:56",
+                    "project_name": "test_module"
+                },
+                {
+                    "id": 118,
+                    "module_name": "118aaa",
+                    "project_id": 1111,
+                    "test_user": "daij",
+                    "module_desc": "",
+                    "create_time": "2026-08-22 19:54:56",
+                    "update_time": "2026-08-22 19:54:56",
+                    "project_name": "test_module"
+                },
+                {
+                    "id": 117,
+                    "module_name": "117aaa",
+                    "project_id": 1111,
+                    "test_user": "daij",
+                    "module_desc": "",
+                    "create_time": "2026-08-22 19:54:56",
+                    "update_time": "2026-08-22 19:54:56",
+                    "project_name": "test_module"
+                },
+                {
+                    "id": 116,
+                    "module_name": "116aaa",
+                    "project_id": 1111,
+                    "test_user": "daij",
+                    "module_desc": "",
+                    "create_time": "2026-08-22 19:54:56",
+                    "update_time": "2026-08-22 19:54:56",
+                    "project_name": "test_module"
+                },
+                {
+                    "id": 115,
+                    "module_name": "115aaa",
+                    "project_id": 1111,
+                    "test_user": "daij",
+                    "module_desc": "",
+                    "create_time": "2026-08-22 19:54:56",
+                    "update_time": "2026-08-22 19:54:56",
+                    "project_name": "test_module"
+                },
+                {
+                    "id": 114,
+                    "module_name": "114aaa",
+                    "project_id": 1111,
+                    "test_user": "daij",
+                    "module_desc": "",
+                    "create_time": "2026-08-22 19:54:56",
+                    "update_time": "2026-08-22 19:54:56",
+                    "project_name": "test_module"
+                }
+            ]
+        })
+    )
+}
+
+"""
+    模拟添加环境已存在，返回400
+"""
+mock_add_env_400 = {
+    'url': '**api/env',
+    'handler': lambda route: route.fulfill(
+        status=400,
+        body=({
+            "errors": {
+                "env_name": "env_name: test123 已存在"
+            },
+            "message": "Input payload validation failed"
+        })
+    )
+}
+
+"""
+    模拟添加环境成功，返回200
+"""
+mock_add_env_200 = {
+    'url': '**api/env',
+    'handler': lambda route: route.fulfill(
+        status=400,
+        body=({
+            "code": 0,
+            "message": "success",
+            "data": {
+                "id": 30,
+                "env_name": "test2026",
+                "base_url": "http://0.0.0.0",
+                "simple_desc": "",
+                "env_code": "",
+                "test_user": "daij",
+                "create_time": "2026-08-27 16:12:34",
+                "update_time": "2026-08-27 16:12:34"
             }
         })
     )

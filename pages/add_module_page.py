@@ -6,7 +6,7 @@ class AddModulePage:
     def __init__(self, page: Page):
         self.page = page
         self.locator_module_name = page.get_by_label('模块名称:')
-        self.locator_module_project = page.get_by_label('所属项目')
+        self.locator_module_project = page.get_by_label('所属项目:')
         self.locator_module_desc = page.get_by_label('模块描述:')
         self.locator_submit_btn = page.get_by_role('button', name='点击提交')
         # 模态框

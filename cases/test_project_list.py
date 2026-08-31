@@ -1,5 +1,5 @@
 import pytest
-from playwright.sync_api import expect, Page
+from playwright.sync_api import expect
 
 from mocks.mock_api import mock_project_400, mock_project_500, mock_project_200, mock_search_project_0, \
     mock_search_project_1, mock_project_delete_403
@@ -16,15 +16,6 @@ class TestProjectList:
         self.project_list.navigate()
         yield
         print("for each--end: 后置操作")
-
-
-    # @pytest.fixture(autouse=True)
-    # def start_for_each(self, login_first, page: Page):
-    #     print("for each--start: 打开项目列表页")
-    #     self.project_list = ProjectListPage(page)
-    #     self.project_list.navigate()
-    #     yield
-    #     print("for each--end: 后置操作")
 
     def test_add_project_null(self):
         """新增项目，项目名为空"""
