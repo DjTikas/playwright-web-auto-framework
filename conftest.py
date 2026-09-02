@@ -98,8 +98,8 @@ def ding_ding_notify(
 DING_TALK = {
     "access_token": "dd718e6c7c71da6248a2c7e7442afe9aa0ad0719983f984b2f1ac8b4a764c1fb",
     "title": "测试报告",
-    "at_mobiles": ["15719497316"],
-    "text": "- 查看报告：[allure报告地址](http://192.168.58.130:8080/job/test/allure/)"
+    "at_mobiles": ["15719497316", '183********'],
+    "text": "- 查看报告：[allure报告地址](http://106.55.15.17:8080/job/test-demo/allure/)"
 }
 
 def pytest_terminal_summary(terminalreporter, exitstatus, config): # noqa
