@@ -1,0 +1,18 @@
+name: Mirror to Gitee
+on:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Mirror code to gitee
+        uses: Yikun/hub-mirror-action@master
+        env:
+          GITEE_REPO:  DJawsl/playwright-web-auto-framework
+          GITEE_TOKEN: ${{ secrets.GITEE_TOKEN }}
