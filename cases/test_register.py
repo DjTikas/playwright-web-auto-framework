@@ -41,7 +41,7 @@ class TestRegister:
 
     def test_register_3(self):
         """用户名包含特殊字符"""
-        self.register.fill_username('daij')
+        self.register.fill_username('daij@')
         self.register.fill_password('123456aa')
         # 断言
         expect(self.register.locator_username_tip3).to_be_visible()

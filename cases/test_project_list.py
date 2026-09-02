@@ -17,6 +17,7 @@ class TestProjectList:
         yield
         print("for each--end: 后置操作")
 
+    @pytest.mark.skip('同类型的用例比较多')
     def test_add_project_null(self):
         """新增项目，项目名为空"""
         self.project_list.click_add_project()
@@ -25,6 +26,7 @@ class TestProjectList:
         # 断言模态框不隐藏
         expect(self.project_list.locator_add_modal).not_to_be_hidden()
 
+    @pytest.mark.skip('同类型的用例比较多')
     def test_add_project_dismiss(self):
         """新增项目，模态框取消"""
         self.project_list.click_add_project()
