@@ -606,10 +606,10 @@ mock_module_list_table_10_row = {
     模拟添加环境已存在，返回400
 """
 mock_add_env_400 = {
-    'url': '**api/env',
+    'url': '**/api/env',
     'handler': lambda route: route.fulfill(
         status=400,
-        body=({
+        body=json.dumps({
             "errors": {
                 "env_name": "env_name: test123 已存在"
             },
@@ -621,11 +621,11 @@ mock_add_env_400 = {
 """
     模拟添加环境成功，返回200
 """
-mock_add_env_200 = {
-    'url': '**api/env',
+mock_add_env_201 = {
+    'url': '**/api/env',
     'handler': lambda route: route.fulfill(
-        status=200,
-        body=({
+        status=201,
+        body=json.dumps({
             "code": 0,
             "message": "success",
             "data": {

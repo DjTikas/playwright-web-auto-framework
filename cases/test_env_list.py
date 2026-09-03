@@ -1,7 +1,7 @@
 import pytest
 from playwright.sync_api import Page, expect
 
-from mocks.mock_api import mock_add_env_400, mock_add_env_200
+from mocks.mock_api import mock_add_env_400, mock_add_env_201
 from pages.env_list_page import EnvListPage
 
 
@@ -107,8 +107,9 @@ class TestEnvList:
         expect(self.env.locator_add_modal).not_to_be_hidden()
         self.env.input_env_name('test2026')
         self.env.input_env_address('http://www.baidu.com')
-        # mock 返回200 成功
-        self.env.page.route(**mock_add_env_200)
+        # mock 返回201 成功
+        self.env.page.route(**mock_add_env_201)
+        # with self.env.page.expect_request('**/api/env')
         self.env.click_modal_save()
         # 断言添加成功
-        expect(self.env.locator_add_modal).not_to_be_visible()
+        expect(self.env.locator_add_modal).to_be_hidden()
