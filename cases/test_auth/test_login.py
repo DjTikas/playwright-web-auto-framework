@@ -29,11 +29,18 @@ class TestLogin:
         assert tip_text is not None and keyword in tip_text
         expect(self.login.locator_login_btn).not_to_be_enabled()
 
+    def test_login_success(self):
+        """成功登录，常规断言"""
+        self.login.login('daij', 'aa123456')
+        # 断言title和url
+        expect(self.login.page).to_have_title('首页')
+        expect(self.login.page).to_have_url('/index.html')
+
     @pytest.mark.parametrize('username, pwd, title', [
         ['daij123', 'aa123456', '用户名错误，密码正确'],
         ['daij', 'aa123456789', '用户名正确，密码错误']
     ])
-    def test_login_error(self, username:str, pwd: str, title:str):
+    def test_login_wrong_credentials	(self, username:str, pwd: str, title:str):
         """用户名密码错误"""
         self.login.login(username, pwd)
         expect(self.login.locator_login_error).to_be_visible()
@@ -47,10 +54,4 @@ class TestLogin:
         expect(self.login.page).to_have_title('注册')
         expect(self.login.page).to_have_url('/register.html')
 
-    def test_login_success_1(self):
-        """成功登录，常规断言"""
-        self.login.login('daij', 'aa123456')
-        # 断言title和url
-        expect(self.login.page).to_have_title('首页')
-        expect(self.login.page).to_have_url('/index.html')
 

@@ -2,6 +2,8 @@ import uuid
 import pytest
 from playwright.sync_api import Page, expect
 from cases.common.validation_data import FORM_VALIDATION_CASES
+from cases.conftest import unlogin_page
+from pages.login_page import LoginPage
 from pages.register_page import RegisterPage
 
 
@@ -29,7 +31,21 @@ class TestRegister:
         assert tip_text is not None and keyword in tip_text
         expect(self.register.locator_register_btn).not_to_be_enabled()
 
-    def test_register_error(self):
+    def test_register_success(self, unlogin_page: Page):
+        """注册新账号成功"""
+        username = str(uuid.uuid4())[:8]
+        pwd = 'aa123456'
+        self.register.register(username, pwd)
+        expect(self.register.page).to_have_title('首页')
+        expect(self.register.page).to_have_url('/index.html')
+        # 验证该账号可以登录
+        login_page = LoginPage(unlogin_page)
+        login_page.navigate()
+        login_page.login(username, pwd)
+        expect(login_page.page).to_have_title('首页')
+        expect(login_page.page).to_have_url('/index.html')
+
+    def test_register_username_exists(self):
         """用户名已存在"""
         self.register.register('daij', 'aa123456')
         expect(self.register.locator_register_error).to_be_visible()
@@ -40,11 +56,3 @@ class TestRegister:
         self.register.click_login_link()
         expect(self.register.page).to_have_title('网站登录')
         expect(self.register.page).to_have_url('/login.html')
-
-    def test_register_success(self):
-        """注册新账号成功"""
-        username = str(uuid.uuid4())[:8]
-        pwd = 'aa123456'
-        self.register.register(username, pwd)
-        expect(self.register.page).to_have_title('首页')
-        expect(self.register.page).to_have_url('/index.html')
