@@ -18,7 +18,7 @@ playwright帮助官网：https://playwright.net.cn/python/docs/intro
 
 `pages` 封装的页面元素
 
-- `plugins` 二开扩展插件
+- `plugins` 二开扩展插件（暂时无用）
 
 `conftest.py` pytest配置文件
 
@@ -30,7 +30,7 @@ playwright帮助官网：https://playwright.net.cn/python/docs/intro
 
 `run.py` 框架运行入口
 
-`requirements.txt` 项目环境运行所需的第三方库
+`requirement.txt` 项目环境运行所需的第三方库
 
 `pytest.ini` 测试框架的配置文件，制定运行规则
 

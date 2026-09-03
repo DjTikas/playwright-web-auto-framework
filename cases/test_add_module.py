@@ -1,5 +1,5 @@
 import pytest
-from playwright.sync_api import expect
+from playwright.sync_api import expect, Page
 
 from mocks.mock_api import mock_project_select_200, mock_module_repeat_400, mock_add_module_201
 from pages.add_module_page import AddModulePage
@@ -8,9 +8,9 @@ from pages.add_module_page import AddModulePage
 class TestAddModule:
     """新增模块页面"""
     @pytest.fixture(autouse=True)
-    def start_for_each(self, login_prepare, shared_page):
+    def start_for_each(self, login_prepare, page: Page):
         print('for each--start：打开新增模块页面')
-        self.add_module = AddModulePage(shared_page)
+        self.add_module = AddModulePage(page)
         # 拦截项目选项数据，模拟返回选项
         self.add_module.page.route(**mock_project_select_200)
         self.add_module.navigate()

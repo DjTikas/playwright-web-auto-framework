@@ -10,9 +10,9 @@ from pages.add_project_page import AddProjectPage
 class TestAddProject:
     """新增项目页"""
     @pytest.fixture(autouse=True)
-    def start_for_each(self, login_prepare, shared_page: Page):
+    def start_for_each(self, login_prepare, page: Page):
         print("for each--start: 打开添加项目页")
-        self.add_project = AddProjectPage(shared_page)
+        self.add_project = AddProjectPage(page)
         self.add_project.navigate()
         yield
         print("for each--end: 后置操作")
@@ -59,21 +59,21 @@ class TestAddProject:
         # 断言 按钮不可点击
         expect(self.add_project.locator_submit_btn).to_be_disabled()
 
-    def test_add_project_400(self, shared_page):
+    def test_add_project_400(self):
         """项目已存在，弹出模态框，400状态码"""
         self.add_project.fill_project_name('test')
         # mock 接口返回400
-        shared_page.route(**mock_api.mock_project_400)
+        self.add_project.page.route(**mock_api.mock_project_400)
         self.add_project.click_submit_btn()
         # 校验结果 弹出框文本包含
         expect(self.add_project.locator_bootbox).to_be_visible()
         expect(self.add_project.locator_bootbox).to_contain_text('已存在')
 
-    def test_add_project_500(self, shared_page):
+    def test_add_project_500(self):
         """服务器异常，500状态码"""
         self.add_project.fill_project_name('test')
         # mock 接口返回500
-        shared_page.route(**mock_api.mock_project_500)
+        self.add_project.page.route(**mock_api.mock_project_500)
         self.add_project.click_submit_btn()
         # 校验结果 弹出框文本包含
         expect(self.add_project.locator_bootbox).to_be_visible()

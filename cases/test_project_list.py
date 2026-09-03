@@ -1,5 +1,5 @@
 import pytest
-from playwright.sync_api import expect
+from playwright.sync_api import expect, Page
 
 from mocks.mock_api import mock_project_400, mock_project_500, mock_project_200, mock_search_project_0, \
     mock_search_project_1, mock_project_delete_403
@@ -10,9 +10,9 @@ class TestProjectList:
     """项目列表页"""
 
     @pytest.fixture(autouse=True)
-    def start_for_each(self, login_prepare, shared_page):
+    def start_for_each(self, login_prepare, page: Page):
         print("for each--start: 打开项目列表页")
-        self.project_list = ProjectListPage(shared_page)
+        self.project_list = ProjectListPage(page)
         self.project_list.navigate()
         yield
         print("for each--end: 后置操作")

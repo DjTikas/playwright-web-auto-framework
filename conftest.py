@@ -4,12 +4,12 @@ import shutil
 import pytest
 from pytest import Item
 import allure
-# import pytest
-# from typing import Dict
-#
-# # 本地插件注册
-# pytest_plugins = ['plugins.pytest_playwright']
-#
+import pytest
+from typing import Dict
+
+# 本地插件注册
+pytest_plugins = ['plugins.pytest_playwright']
+
 
 def pytest_runtest_call(item: Item):
     # 动态添加测试类的allure.feature()
@@ -21,6 +21,7 @@ def pytest_runtest_call(item: Item):
 
 
 def _clean_dir(dir_path: str):
+    """清理allure相关目录"""
     if os.path.exists(dir_path):
         for name in os.listdir(dir_path):
             full_path = os.path.join(dir_path, name)
@@ -38,27 +39,28 @@ def clean_allure_env():
     _clean_dir("reports")
     yield
 
-#
-# # 重写插件钩子 1
-# # 生产参数字典，供给 pytest‑playwright 内部，用于启动浏览器。
-# @pytest.fixture(scope="session")
-# def browser_type_launch_args(browser_type_launch_args) -> Dict:
-#     """窗口最大化"""
-#     return {"args": ['--start-maximized'], **browser_type_launch_args}
-#
-#
-# # 重写插件钩子 2
-# # 生产参数字典，输出一个配置字典。
-# # unlogin_context等固件会 消费这个字典
-# @pytest.fixture(scope="session")
-# def browser_context_args(browser_context_args, playwright, pytestconfig) -> Dict:
-#     """窗口最大化"""
-#     return {
-#         "no_viewport": True,
-#         # 忽略https报错
-#         "ignore_https_errors": True,
-#         **browser_context_args
-#     }
+
+# 重写插件钩子 1
+# 生产参数字典，供给 pytest‑playwright 内部，用于启动浏览器。
+@pytest.fixture(scope="session")
+def browser_type_launch_args(browser_type_launch_args) -> Dict:
+    """窗口最大化"""
+    return {"args": ['--start-maximized'], **browser_type_launch_args}
+
+
+# 重写插件钩子 2
+# 生产参数字典，输出一个配置字典。
+# unlogin_context等固件会 消费这个字典
+@pytest.fixture(scope="session")
+def browser_context_args(browser_context_args, playwright, pytestconfig) -> Dict:
+    """窗口最大化"""
+    return {
+        "no_viewport": True,
+        # 忽略https报错
+        "ignore_https_errors": True,
+        **browser_context_args
+    }
+
 
 
 from dingtalkchatbot.chatbot import DingtalkChatbot
@@ -86,7 +88,6 @@ def ding_ding_notify(
     """
     webhook = f'https://oapi.dingtalk.com/robot/send?access_token={access_token}'
     ding = DingtalkChatbot(webhook=webhook, secret=secret, pc_slide=pc_slide, fail_notice=fail_notice)
-    print('发送钉钉消息')
     ding.send_markdown(
         title=title, text=text, is_at_all=is_at_all,
         at_mobiles=at_mobiles if at_mobiles else [],
@@ -126,7 +127,6 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config): # noqa
 - 异常用例： {error}
 - 通过率： {successful: .2f} % \n
 """
-        print('markdown_text='+markdown_text)
         if DING_TALK.get('text'):
             DING_TALK['text'] = markdown_text + DING_TALK['text']
         else:

@@ -1,5 +1,5 @@
 import pytest
-from playwright.sync_api import expect
+from playwright.sync_api import expect, Page
 
 from mocks.mock_api import mock_project_select_200, mock_module_list_table_page_1, mock_module_list_table_page_2, \
     mock_module_list_table_10_row
@@ -10,9 +10,9 @@ class TestModuleList:
     """模块列表页"""
 
     @pytest.fixture(autouse=True)
-    def start_for_each(self, login_prepare, shared_page):
+    def start_for_each(self, login_prepare, page: Page):
         print('for each--start：打开模块列表页面')
-        self.module_list = ModuleListPage(shared_page)
+        self.module_list = ModuleListPage(page)
         self.module_list.page.route(**mock_project_select_200)
         self.module_list.page.route(**mock_module_list_table_page_1)
         self.module_list.navigate()

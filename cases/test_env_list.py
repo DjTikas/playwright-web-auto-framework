@@ -9,9 +9,9 @@ class TestEnvList:
     """环境列表页面"""
 
     @pytest.fixture(autouse=True)
-    def start_for_each(self, login_prepare, shared_page: Page):
+    def start_for_each(self, login_prepare, page: Page):
         print("for each--start: 打开项目列表页")
-        self.env = EnvListPage(shared_page)
+        self.env = EnvListPage(page)
         self.env.navigate()
         yield
         print("for each--end: 后置操作")
