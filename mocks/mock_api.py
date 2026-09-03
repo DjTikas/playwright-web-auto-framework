@@ -51,6 +51,122 @@ mock_project_200 = {
     )
 }
 
+
+"""
+    模拟进入项目列表页面渲染表格，返回4条数据
+"""
+mock_project_render_10_row = {
+    "url": "**/api/project**",
+    "handler": lambda route: route.fulfill(
+        status = 200,
+        body=json.dumps({
+            "total": 10,
+            "rows": [
+                {
+                    "id": 3191,
+                    "project_name": "50e78c1f",
+                    "publish_app": "",
+                    "project_desc": "",
+                    "active": "1",
+                    "create_time": "2026-09-03 18:20:32",
+                    "update_time": "2026-09-03 18:20:32",
+                    "test_user": "daij"
+                },
+                {
+                    "id": 3190,
+                    "project_name": "0d639a6a",
+                    "publish_app": "",
+                    "project_desc": "",
+                    "active": "1",
+                    "create_time": "2026-09-03 18:20:31",
+                    "update_time": "2026-09-03 18:20:31",
+                    "test_user": "daij"
+                },
+                {
+                    "id": 3189,
+                    "project_name": "751b2978",
+                    "publish_app": "",
+                    "project_desc": "",
+                    "active": "1",
+                    "create_time": "2026-09-03 18:09:56",
+                    "update_time": "2026-09-03 18:09:56",
+                    "test_user": "daij"
+                },
+                {
+                    "id": 3188,
+                    "project_name": "efaa5697",
+                    "publish_app": "",
+                    "project_desc": "",
+                    "active": "1",
+                    "create_time": "2026-09-03 18:09:55",
+                    "update_time": "2026-09-03 18:09:55",
+                    "test_user": "daij"
+                },
+                {
+                    "id": 3187,
+                    "project_name": "d8aea3a0",
+                    "publish_app": "",
+                    "project_desc": "",
+                    "active": "1",
+                    "create_time": "2026-09-03 17:55:17",
+                    "update_time": "2026-09-03 17:55:17",
+                    "test_user": "daij"
+                },
+                {
+                    "id": 3186,
+                    "project_name": "e5fd77cf",
+                    "publish_app": "",
+                    "project_desc": "",
+                    "active": "1",
+                    "create_time": "2026-09-03 17:55:17",
+                    "update_time": "2026-09-03 17:55:17",
+                    "test_user": "daij"
+                },
+                {
+                    "id": 3185,
+                    "project_name": "f14494bc",
+                    "publish_app": "",
+                    "project_desc": "",
+                    "active": "1",
+                    "create_time": "2026-09-03 01:19:03",
+                    "update_time": "2026-09-03 01:19:03",
+                    "test_user": "daij"
+                },
+                {
+                    "id": 3184,
+                    "project_name": "1ac81f02",
+                    "publish_app": "",
+                    "project_desc": "",
+                    "active": "1",
+                    "create_time": "2026-09-03 01:19:02",
+                    "update_time": "2026-09-03 01:19:02",
+                    "test_user": "daij"
+                },
+                {
+                    "id": 3183,
+                    "project_name": "a69e4295",
+                    "publish_app": "",
+                    "project_desc": "",
+                    "active": "1",
+                    "create_time": "2026-09-03 00:00:32",
+                    "update_time": "2026-09-03 00:00:32",
+                    "test_user": "daij"
+                },
+                {
+                    "id": 3182,
+                    "project_name": "57bb7ca4",
+                    "publish_app": "",
+                    "project_desc": "",
+                    "active": "1",
+                    "create_time": "2026-09-03 00:00:31",
+                    "update_time": "2026-09-03 00:00:31",
+                    "test_user": "daij"
+                }
+            ]
+        })
+    )
+}
+
 """
     模拟搜素项目，返回0个结果
 """

@@ -17,6 +17,8 @@ class ProjectListPage:
         self.locator_modal_btn_dismiss = self.locator_add_modal.get_by_text('取消')
         # 编辑项目模态框
         self.locator_edit_modal = page.locator('#myModal')
+        self.locator_edit_app = self.locator_edit_modal.locator('#publish_app')
+        self.locator_edit_save_btn = self.locator_edit_modal.get_by_role('button', name='保存')
         # 刷新页面按钮
         self.locator_refresh = page.get_by_title('刷新')
         # table表格按钮
