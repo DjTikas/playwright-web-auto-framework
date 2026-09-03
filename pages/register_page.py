@@ -1,3 +1,5 @@
+from typing import Optional
+
 import allure
 from playwright.sync_api import Page
 
@@ -44,3 +46,22 @@ class RegisterPage:
             self.fill_username(username)
             self.fill_password(password)
             self.click_register_btn()
+
+    def fill_invalid_and_get_tip(self, field: str, value: str) -> Optional[str]:
+        """填入非法值，返回当前可见的字段提示文本；无提示返回 None"""
+        if field == "username":
+            self.fill_username(value)
+            self.fill_password("123456aa")  # 让用户名单独触发校验
+            if value == '':
+                self.locator_register_btn.click()
+            tips = [self.locator_username_tip1, self.locator_username_tip2, self.locator_username_tip3]
+        else:
+            self.fill_username("daij")
+            self.fill_password(value)  # 让密码单独触发校验
+            if value == '':
+                self.locator_register_btn.click()
+            tips = [self.locator_password_tip1, self.locator_password_tip2, self.locator_password_tip3]
+        for tip in tips:
+            if tip.is_visible():
+                return tip.inner_text()
+        return None

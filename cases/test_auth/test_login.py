@@ -1,5 +1,6 @@
 import pytest
 from playwright.sync_api import Page, expect
+from cases.common.validation_data import FORM_VALIDATION_CASES
 from pages.login_page import LoginPage
 
 
@@ -20,75 +21,13 @@ class TestLogin:
         yield
         print("for each--end: 后置操作")
 
-    def test_login_1(self):
-        """用户名为空，点登录"""
-        self.login.fill_username('')
-        self.login.fill_password('123456aa')
-        self.login.click_login_btn()
-        # 断言
-        expect(self.login.locator_username_tip1).to_be_visible()
-        expect(self.login.locator_username_tip1).to_contain_text('不能为空')
-
-    def test_login_2(self):
-        """用户名超过30位"""
-        self.login.fill_username('123456789012345678901234567890123456')
-        self.login.fill_password('123456aa')
-        # 断言
-        expect(self.login.locator_username_tip2).to_be_visible()
-        expect(self.login.locator_username_tip2).to_contain_text('用户名称1-30位字符')
+    @pytest.mark.parametrize("field, value, keyword", FORM_VALIDATION_CASES,
+                             ids=[f"{f}-{k}" for f, _, k in FORM_VALIDATION_CASES])
+    def test_form_validation(self, field, value, keyword):
+        """登录页表单校验"""
+        tip_text = self.login.fill_invalid_and_get_tip(field, value)
+        assert tip_text is not None and keyword in tip_text
         expect(self.login.locator_login_btn).not_to_be_enabled()
-
-    def test_login_3(self):
-        """用户名包含特殊字符"""
-        self.login.fill_username('daij*@')
-        self.login.fill_password('123456aa')
-        # 断言
-        expect(self.login.locator_username_tip3).to_be_visible()
-        expect(self.login.locator_username_tip3).to_contain_text('用户名称不能有特殊字符,请用中英文数字_')
-        expect(self.login.locator_login_btn).not_to_be_enabled()
-
-    def test_login_4(self):
-        """密码为空，点登录"""
-        self.login.fill_username('daij')
-        self.login.fill_password('')
-        self.login.click_login_btn()
-        # 断言
-        expect(self.login.locator_password_tip1).to_be_visible()
-        expect(self.login.locator_password_tip1).to_contain_text('不能为空')
-
-    # 不知道为什么加上了title，估计是allure报告会用上吧
-    @pytest.mark.parametrize('username, pwd, title', [
-        ['tikas', '12345678901234567890', '密码超过16位'],
-        ['daij', '123', '密码少于6位'],
-    ])
-    def test_login_5(self, username:str, pwd: str, title:str):
-        """密码小于6位或者大于16位"""
-        self.login.fill_username(username)
-        self.login.fill_password(pwd)
-        # 断言
-        expect(self.login.locator_password_tip2).to_be_visible()
-        expect(self.login.locator_password_tip2).to_contain_text('密码6-16位字符')
-        expect(self.login.locator_login_btn).not_to_be_enabled()
-
-    def test_login_6(self):
-        """密码包含特殊字符"""
-        self.login.fill_username('daij')
-        self.login.fill_password('123456aa*-')
-        # 断言
-        expect(self.login.locator_password_tip3).to_be_visible()
-        expect(self.login.locator_password_tip3).to_contain_text('不能有特殊字符,请用中英文数字下划线')
-        expect(self.login.locator_login_btn).not_to_be_enabled()
-
-    def test_login_7(self):
-        """用户名密码同时为空"""
-        self.login.fill_username('')
-        self.login.fill_password('')
-        self.login.click_login_btn()
-        # 断言
-        expect(self.login.locator_username_tip1).to_be_visible()
-        expect(self.login.locator_username_tip1).to_contain_text('不能为空')
-        expect(self.login.locator_password_tip1).to_be_visible()
-        expect(self.login.locator_password_tip1).to_contain_text('不能为空')
 
     @pytest.mark.parametrize('username, pwd, title', [
         ['daij123', 'aa123456', '用户名错误，密码正确'],
