@@ -103,7 +103,6 @@ class TestProjectList:
         # 断言请求参数
         assert 'page=1&size=15&project_name=&' in req.value.url
         assert req.value.method == "GET"
-        assert False
 
     def test_link(self):
         """表格行内的链接"""
@@ -114,7 +113,7 @@ class TestProjectList:
         # 断言链接的属性和指向
         # 这里的id必须要和mock里面的id一致
         # 故意写成了不一致，所以会报错
-        expect(self.project_list.locator_table_link_debugtalk).to_have_attribute('href','debugtalk.html?project_id=3046')
+        expect(self.project_list.locator_table_link_debugtalk).to_have_attribute('href','debugtalk.html?project_id=1')
 
     def test_table_delete(self):
         """表格内删除。无法删除，需要管理员权限"""

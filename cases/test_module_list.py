@@ -55,7 +55,7 @@ class TestModuleList:
         self.module_list.locator_pag_next.click()
         with self.module_list.page.expect_request('**/api/module**') as req:
             self.module_list.locator_refresh_btn.click()
-        assert 'page=1' in req.value.url
+        assert 'page=2' in req.value.url
         assert 'size=15' in req.value.url
         assert req.value.method == 'GET'
 
