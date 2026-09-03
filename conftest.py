@@ -1,7 +1,5 @@
 import os
 import shutil
-
-import pytest
 from pytest import Item
 import allure
 import pytest
@@ -10,14 +8,42 @@ from typing import Dict
 # 本地插件注册
 pytest_plugins = ['plugins.pytest_playwright']
 
+# ========== 定义浏览器前缀（用于截断） ==========
+BROWSER_PREFIXES = ['chromium-', 'firefox-', 'webkit-', 'msedge-']
+
+def decode_unicode_escape(s: str) -> str:
+    try:
+        if '\\u' in s:
+            return s.encode('utf-8').decode('unicode_escape')
+        return s
+    except Exception:
+        return s
 
 def pytest_runtest_call(item: Item):
-    # 动态添加测试类的allure.feature()
-    if item.parent._obj.__doc__:
-        allure.dynamic.feature(item.parent._obj.__doc__)
-    # 动态添加测试用例的title标题allure.title()
-    if item.function.__doc__:
-        allure.dynamic.title(item.function.__doc__)
+    if item.parent and item.parent._obj.__doc__:
+        allure.dynamic.feature(item.parent._obj.__doc__.strip())
+
+    base_title = item.function.__doc__.strip() if item.function.__doc__ else item.name
+
+    if hasattr(item, 'callspec') and item.callspec.id:
+        full_id = item.callspec.id
+        # 去掉浏览器前缀
+        custom_id = full_id
+        for prefix in BROWSER_PREFIXES:
+            if full_id.startswith(prefix):
+                custom_id = full_id[len(prefix):]
+                break
+        # 转码
+        custom_id = decode_unicode_escape(custom_id)
+
+        if custom_id:
+            title = f"{base_title} - {custom_id}"
+        else:
+            title = base_title
+    else:
+        title = base_title
+
+    allure.dynamic.title(title)
 
 
 def _clean_dir(dir_path: str):
