@@ -11,7 +11,7 @@ class TestEnvList:
 
     @pytest.fixture(autouse=True)
     def start_for_each(self, login_prepare, page: Page):
-        print("for each--start: 打开项目列表页")
+        print("for each--start: 打开环境列表页")
         self.env = EnvListPage(page)
         self.env.navigate()
         yield

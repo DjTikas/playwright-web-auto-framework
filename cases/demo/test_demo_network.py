@@ -1,5 +1,6 @@
 import pytest
 from playwright.sync_api import Page
+from pages.login_page import LoginPage
 
 
 class TestDemoNetwork:
@@ -8,7 +9,6 @@ class TestDemoNetwork:
     @pytest.fixture(autouse=True)
     def start_for_login(self, unlogin_page: Page):
         print("for each--start: 打开新页面访问登录页")
-        from pages.login_page import LoginPage
         self.login = LoginPage(unlogin_page)
         self.login.navigate()
         yield
