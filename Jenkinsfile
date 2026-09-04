@@ -22,14 +22,12 @@ pipeline {
     post {
         always {
             script {
-                echo "allure reports clear and generate"
-                sh 'rm -rf ~/.jenkins/workspace/test-demo/reports/*'
-                sh 'rm -rf ~/.jenkins/workspace/test-demo/allure-report/*'
-                sh 'cp -rf ./../docker-demo-play/reports ${WORKSPACE}/reports'
-                sh 'allure generate ./reports -o ./allure_report --clean --lang zh'
+                echo "allure prepare"
+                sh "rm -rf ${WORKSPACE}/reports/*"
+                sh "cp -rf ${WORKSPACE}/../docker-demo-play/reports ${WORKSPACE}/"
                 allure includeProperties: false,
                        jdk: '',
-                       resultPolicy: 'LEAVE_AS_IS',
+                       resultPolicy: 'CLEAN_PREVIOUS',
                        results: [[path: 'reports']]
             }
         }
