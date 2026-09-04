@@ -36,7 +36,6 @@ class TestAddProject:
             '//table[@id="table"]//td[3]/a'
         )
         project_name_list = [i.inner_text() for i in locator_projects.all()]
-        print(project_name_list)
         assert project_name in project_name_list
 
     @pytest.mark.parametrize('title, name, app, desc', ADD_PROJECT_VALIDATION_CASES,

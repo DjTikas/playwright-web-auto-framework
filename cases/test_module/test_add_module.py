@@ -1,3 +1,5 @@
+import uuid
+
 import pytest
 from playwright.sync_api import expect, Page
 
@@ -20,18 +22,19 @@ class TestAddModule:
     def test_add_module_name_null(self):
         """模块名为空"""
         self.add_module.fill_module_name('')
+        self.add_module.select_project_by_value('test')
         self.add_module.click_submit_btn()
         # 断言按钮不可点击
         expect(self.add_module.locator_submit_btn).to_be_disabled()
 
     def test_add_module_project_null(self):
-        """项目名为空"""
+        """下拉项目名为空"""
         self.add_module.fill_module_name('test')
         self.add_module.click_submit_btn()
         # 断言按钮不可点击
         expect(self.add_module.locator_submit_btn).to_be_disabled()
 
-    def test_add_module_repeat(self):
+    def test_add_module_repeat_400(self):
         """模块名重复"""
         self.add_module.fill_module_name('test')
         self.add_module.select_project_by_value('test')
@@ -42,7 +45,7 @@ class TestAddModule:
         expect(self.add_module.locator_bootbox_body).to_be_visible()
         expect(self.add_module.locator_bootbox_body).to_contain_text('已存在')
 
-    def test_add_module_success(self):
+    def test_add_module_success_201(self):
         """添加模块成功"""
         self.add_module.fill_module_name('testxx')
         self.add_module.select_project_by_value('test')
@@ -54,3 +57,25 @@ class TestAddModule:
         expect(self.add_module.page).to_have_title('模块列表')
         expect(self.add_module.page).to_have_url('/list_module.html')
 
+    def test_add_module_closed_loop(self):
+        """验证新增模块出现在列表中"""
+        self.add_module.page.unroute("**/api/project")
+        self.add_module.page.reload()
+        module_name = f"module_{str(uuid.uuid4())[:8]}"
+        self.add_module.fill_module_name(module_name)
+        self.add_module.select_project_by_value('dj_project')
+        self.add_module.click_submit_btn()
+        # 断言跳转页面
+        expect(self.add_module.page).to_have_title('模块列表')
+        expect(self.add_module.page).to_have_url('/list_module.html')
+        # 点击保存后等页面重定向到table表格页
+        self.add_module.page.wait_for_load_state('networkidle')
+        # 等待表格DOM出现，再去all拿元素，减少偶发空列表
+        self.add_module.page.locator("#table").wait_for()
+        # 断言新增模块在列表页
+        # 获取页面 table 表格-模块名称列全部内容
+        locator_projects = self.add_module.page.locator(
+            '//table[@id="table"]//td[3]/a'
+        )
+        module_name_list = [i.inner_text() for i in locator_projects.all()]
+        assert module_name in module_name_list

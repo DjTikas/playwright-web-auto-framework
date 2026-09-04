@@ -19,10 +19,23 @@ class TestModuleList:
         yield
         print('for each--end：后置操作')
 
-    def test_table_render_correct(self):
+    def test_module_list_render(self):
         """表格渲染校验"""
         # 断言 表格行数、文本内容
         expect(self.module_list.locator_table_tr).to_have_count(15)
+        expect(self.module_list.locator_table_tr.first).to_contain_text('123aaa')
+
+    def test_module_list_search_combine(self):
+        """项目下拉 + 关键词组合搜索"""
+        self.module_list.select_project_by_value('test_module')
+        self.module_list.locator_search_module_box.fill('123aaa')
+        with self.module_list.page.expect_request('**/api/module**') as req:
+            self.module_list.locator_search_btn.click()
+        assert 'module_name=123aaa' in req.value.url
+        # 这里test_module对应的id是1111
+        assert 'project=1111' in req.value.url
+        assert req.value.method == 'GET'
+        # 断言表格
         expect(self.module_list.locator_table_tr.first).to_contain_text('123aaa')
 
     def test_pagination_switch_page(self):
@@ -49,7 +62,7 @@ class TestModuleList:
         assert 'size=10' in req.value.url
         expect(self.module_list.locator_table_tr).to_have_count(10)
 
-    def test_search_refresh_btn(self):
+    def test_module_list_refresh_reset(self):
         """测试重置按钮"""
         self.module_list.page.route(**mock_module_list_table_page_2)
         self.module_list.locator_pag_next.click()
@@ -57,15 +70,4 @@ class TestModuleList:
             self.module_list.locator_refresh_btn.click()
         assert 'page=2' in req.value.url
         assert 'size=15' in req.value.url
-        assert req.value.method == 'GET'
-
-    def test_search_combine_project_select(self):
-        """组合条件查询：项目下拉框 + 模块名称关键词同时筛选"""
-        self.module_list.select_project_by_value('test_module')
-        self.module_list.locator_search_module_box.fill('123aaa')
-        with self.module_list.page.expect_request('**/api/module**') as req:
-            self.module_list.locator_search_btn.click()
-        assert 'module_name=123aaa' in req.value.url
-        # 这里test_module对应的id是1111
-        assert 'project=1111' in req.value.url
         assert req.value.method == 'GET'

@@ -23,7 +23,7 @@ def login_prepare(context, base_url, pytestconfig) -> None:
     print("base_url----", base_url)
     page = context.new_page()
     LoginPage(page).navigate()
-    LoginPage(page).login("py", "123456")
+    LoginPage(page).login("daij", "aa123456")
     # 等待登录成功页面重定向
     page.wait_for_url(url='**/index.html')
 
