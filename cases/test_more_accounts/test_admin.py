@@ -12,7 +12,7 @@ from pages.project_list_page import ProjectListPage
 
 
 class TestMoreAccounts:
-
+    """多账户切换"""
     @pytest.fixture(autouse=True)
     def start_for_each(self, login_prepare, page: Page, admin_context: BrowserContext):
         print("for each--start: 打开添加项目页")
