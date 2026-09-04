@@ -45,15 +45,8 @@ class TestAddProject:
         self.add_project.fill_project_name(name)
         self.add_project.fill_publish_app(app)
         self.add_project.fill_project_desc(desc)
-        # 断言 按钮不可点击
-        expect(self.add_project.locator_submit_btn).to_be_disabled()
-
-    def test_add_project_null(self):
-        """项目名为空，提交失败"""
-        self.add_project.fill_project_name('')
-        self.add_project.fill_project_desc('')
-        self.add_project.fill_publish_app('')
-        self.add_project.click_submit_btn()
+        if title == '项目名称为空':
+            self.add_project.click_submit_btn()
         # 断言 按钮不可点击
         expect(self.add_project.locator_submit_btn).to_be_disabled()
 

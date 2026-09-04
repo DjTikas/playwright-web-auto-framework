@@ -27,6 +27,7 @@ class TestMoreAccounts:
         print("for each--end: 后置操作")
 
     def test_delete_project(self):
+        """切换账号删除项目"""
         """
         测试流程：
         step--A账号登录，创建项目xxx
