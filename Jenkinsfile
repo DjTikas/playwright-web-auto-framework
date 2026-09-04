@@ -27,7 +27,7 @@ pipeline {
                 sh "cp -rf ${WORKSPACE}/../docker-demo-play/reports ${WORKSPACE}/"
                 allure includeProperties: false,
                        jdk: '',
-                       resultPolicy: 'DELETE_PREVIOUS',
+                       resultPolicy: 'LEAVE_AS_IS',
                        results: [[path: 'reports']]
             }
         }
