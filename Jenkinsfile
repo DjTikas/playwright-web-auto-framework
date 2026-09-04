@@ -23,12 +23,18 @@ pipeline {
         always {
             script {
                 echo "allure prepare"
-                sh "rm -rf ${WORKSPACE}/reports/*"
-                sh "cp -rf ${WORKSPACE}/../docker-demo-play/reports ${WORKSPACE}/"
-                allure includeProperties: false,
-                       jdk: '',
-                       resultPolicy: 'LEAVE_AS_IS',
-                       results: [[path: 'reports']]
+                sh "rm -rf ${WORKSPACE}/reports"
+                sh "rm -rf ${WORKSPACE}/allure-report"
+                sh "cp -rf ${WORKSPACE}/../docker-demo-play/reports ${WORKSPACE}/reports"
+                sh "allure generate ${WORKSPACE}/reports -o ${WORKSPACE}/allure-report --clean --lang zh"
+                publishHTML(target:[
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: true,
+                    keepAll: true,
+                    reportDir: 'allure-report',
+                    reportFiles: 'index.html',
+                    reportName: 'Allure测试报告'
+                ])
             }
         }
     }
