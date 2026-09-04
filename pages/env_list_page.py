@@ -1,3 +1,5 @@
+from typing import Optional
+
 import allure
 from playwright.sync_api import Page
 
@@ -33,9 +35,6 @@ class EnvListPage:
         self.locator_modal_address_tip2 = self.locator_add_modal.locator(
             '[data-fv-validator="stringLength"][data-fv-for="base_url"]'
         )
-        self.locator_modal_address_tip3 = self.locator_add_modal.locator(
-            '[data-fv-validator="regexp"][data-fv-for="base_url"]'
-        )
         # boot_box 提示语
         self.locator_boot_box = page.locator('.bootbox-body')
 
@@ -66,3 +65,18 @@ class EnvListPage:
     def click_modal_dismiss(self) -> None:
         with allure.step('点击模态框取消按钮'):
             self.locator_modal_dismiss.click()
+
+    def fill_invalid_and_get_tip(self, title: str, name: str, address: str) -> Optional[str]:
+        with allure.step('输入非法字符'):
+            self.input_env_name(name)
+            self.input_env_address(address)
+        with allure.step('点击保存按钮'):
+            self.click_modal_save()
+            if '环境名称' in title:
+                tips = [self.locator_modal_env_tip1, self.locator_modal_env_tip2, self.locator_modal_env_tip3]
+            else:
+                tips = [self.locator_modal_address_tip1, self.locator_modal_address_tip2]
+            for tip in tips:
+                if tip.is_visible():
+                    return tip.inner_text()
+            return None

@@ -8,8 +8,8 @@ import pytest
 
 if __name__ == '__main__':
     # 运行测试用例
-    # pytest.main(['./cases/test_project_list.py', '--alluredir', './reports'])
-    pytest.main(['./cases/test_auth', '--alluredir', './reports'])
+    pytest.main(['./cases/test_project', '--alluredir', './reports'])
+    # pytest.main(['./cases/test_auth', '--alluredir', './reports'])1
     # pytest.main(['--alluredir', './reports'])
     # 生成测试报告
     os.system('allure generate ./reports -o ./allure_report --clean --lang zh')
