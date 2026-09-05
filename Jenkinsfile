@@ -27,14 +27,8 @@ pipeline {
                 sh "rm -rf ${WORKSPACE}/allure-report"
                 sh "cp -rf ${WORKSPACE}/../docker-demo-play/reports ${WORKSPACE}/reports"
                 sh "allure generate ${WORKSPACE}/reports -o ${WORKSPACE}/allure-report --clean --lang zh"
-                publishHTML(target:[
-                    allowMissing: false,
-                    alwaysLinkToLastBuild: true,
-                    keepAll: true,
-                    reportDir: 'allure-report',
-                    reportFiles: 'index.html',
-                    reportName: 'AllureReport'
-                ])
+                sh "rm -rf /opt/allure_latest_report/*"
+                sh "cp -r ${WORKSPACE}/allure-report/* /opt/allure_latest_report/"
             }
         }
     }
