@@ -3,7 +3,7 @@
 基于Playwright+pytest的UI自动化测试框架
 
 **首先安装本项目所需的依赖库，cmd命令为：pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r E:
-\playwright\requirements.txt
+\playwright\requirement.txt
 其中：E:\playwright路径替换自己项目的磁盘路径。**
 
 playwright帮助官网：https://playwright.net.cn/python/docs/intro
@@ -18,7 +18,7 @@ playwright帮助官网：https://playwright.net.cn/python/docs/intro
 
 `pages` 封装的页面元素
 
-- `plugins` 二开扩展插件（暂时无用）
+`plugins` 二开扩展插件
 
 `conftest.py` pytest配置文件
 
@@ -26,7 +26,7 @@ playwright帮助官网：https://playwright.net.cn/python/docs/intro
 
 `test-results` 测试报告截图、视频的临时文件
 
-`allure_report` 生成的allure测试报告
+`allure-report` 生成的allure测试报告
 
 `run.py` 框架运行入口
 
@@ -64,7 +64,7 @@ playwright uninstall --all
 
 allure serve ./reports
 
-查看报告：allure_report/index.html
+查看报告：allure-report/index.html
 
 ### 测试结果追踪trace
 

@@ -9,6 +9,6 @@ if __name__ == '__main__':
     # pytest.main(['./cases/test_auth', '--alluredir', './reports'])1
     pytest.main(['--alluredir', './reports'])
     # 生成测试报告
-    os.system('allure generate ./reports -o ./allure_report --clean --lang zh')
+    os.system('allure generate ./reports -o ./allure-report --clean --lang zh')
     # 打开测试报告
     # os.system('allure serve ./reports')
